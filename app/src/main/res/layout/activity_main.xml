@@ -19,12 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"></FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/drawer_view"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/colorPrimary"></FrameLayout>
-
+        <include layout="@layout/draw_view"></include>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
