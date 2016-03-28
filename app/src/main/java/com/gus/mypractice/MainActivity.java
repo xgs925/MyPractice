@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 convertView = new TextView(MainActivity.this);
                 ((TextView) convertView).setText(mDrawerListTitles[position]);
                 return convertView;
-            }
+                            }
         });
     }
 }
