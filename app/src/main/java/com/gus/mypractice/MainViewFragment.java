@@ -1,13 +1,22 @@
 package com.gus.mypractice;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.gus.mypractice.selfview.TopBarActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +41,8 @@ public class MainViewFragment extends Fragment {
         ButterKnife.bind(this, view);
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
+        mData.add("TopBar");
+        mData.add("test");
         mData.add("test");
         mData.add("test");
         mData.add("test");
@@ -40,6 +50,17 @@ public class MainViewFragment extends Fragment {
         mData.add("test");
         myRecyclerAdapter = new MyRecyclerAdapter(mData);
         mRecyclerView.setAdapter(myRecyclerAdapter);
+        myRecyclerAdapter.setItemClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onItemClick(final View view, int position) {
+                switch (position) {
+                    case 0:
+                        getActivity().startActivity(new Intent(getActivity(), TopBarActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                        break;
+                }
+            }
+        });
         return view;
     }
 }

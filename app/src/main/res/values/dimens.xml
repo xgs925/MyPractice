@@ -6,4 +6,5 @@
     <dimen name="screen_edge_left_and_right_margin">16dp</dimen>
     <dimen name="list_common_item_word_size">21sp</dimen>
     <dimen name="content_associated_with_icon">72dp</dimen>
+    <dimen name="main_view_item_hight">148dp</dimen>
 </resources>
