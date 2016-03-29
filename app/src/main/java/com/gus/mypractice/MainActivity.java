@@ -1,6 +1,7 @@
 package com.gus.mypractice;
 
 import android.app.ActionBar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -24,10 +26,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     @Bind(R.id.drawer_view_list)
     ListView mDrawViewList;
-    @Bind(R.id.main_view)
-    FrameLayout mMainView;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-    private String[] mDrawerListTitles = {"test1", "test2"};
+    private String[] mDrawerListTitles = {"自定义控件", "test2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         mActionBarDrawerToggle.syncState();
 
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+        mDrawViewList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mDrawerLayout.closeDrawers();
+                mToolbar.setTitle(mDrawerListTitles[position]);
+                replaceFragment(position);
+            }
+        });
         mDrawViewList.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -63,10 +71,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                convertView = new TextView(MainActivity.this);
-                ((TextView) convertView).setText(mDrawerListTitles[position]);
+                convertView = getLayoutInflater().inflate(R.layout.drawer_view_list_item, null);
+                TextView title = (TextView) convertView.findViewById(R.id.drawer_view_list_title);
+                title.setText(mDrawerListTitles[position]);
                 return convertView;
-                            }
+            }
         });
+    }
+
+    private void replaceFragment(int position) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_view, new MainViewFragment());
+        transaction.commit();
     }
 }
