@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gus.mypractice.selfview.CircleProgressActivity;
 import com.gus.mypractice.selfview.TopBarActivity;
 
 import java.util.ArrayList;
@@ -42,8 +43,8 @@ public class MainViewFragment extends Fragment {
         mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mData.add("TopBar");
-        mData.add("test");
-        mData.add("test");
+        mData.add("CircleProgress");
+        mData.add("MyScrollView");
         mData.add("test");
         mData.add("test");
         mData.add("test");
@@ -57,6 +58,9 @@ public class MainViewFragment extends Fragment {
                 switch (position) {
                     case 0:
                         getActivity().startActivity(new Intent(getActivity(), TopBarActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                        break;
+                    case 1:
+                        getActivity().startActivity(new Intent(getActivity(), CircleProgressActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
                         break;
                 }
             }

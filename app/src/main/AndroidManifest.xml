@@ -17,6 +17,8 @@
         </activity>
         <activity android:name=".selfview.TopBarActivity" >
         </activity>
+        <activity android:name=".selfview.CircleProgressActivity" >
+        </activity>
     </application>
 
 </manifest>
